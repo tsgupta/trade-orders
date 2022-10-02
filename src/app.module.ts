@@ -9,13 +9,14 @@ const {
   MYSQL_USER,
   MYSQL_PASS,
   MYSQL_DATABASE,
-  MYSQL_PORT
+  MYSQL_PORT,
+  MYSQL_HOST
 } = process.env;
 
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'localhost',
+    host: MYSQL_HOST,
     port: Number.parseInt(MYSQL_PORT),
     username: MYSQL_USER,
     password: MYSQL_PASS,
