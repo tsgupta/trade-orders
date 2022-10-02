@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+      image: mysql:8
+      restart: always
+      hostname: "${MYSQL_HOST}"
+      environment:
+        MYSQL_DATABASE: '${MYSQL_DATABASE}'
+        MYSQL_ROOT_PASSWORD: '${MYSQL_PASS}'
+        MYSQL_TCP_PORT: ${MYSQL_PORT}
+      ports:
+        - '${MYSQL_PORT}:${MYSQL_PORT}'
+  
+  server:
+    build: .
+    command: npm run start
+    ports:
+      - '${HTTP_SERVER_PORT}:${HTTP_SERVER_PORT}'
+    depends_on:
+      - db
